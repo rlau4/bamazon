@@ -107,7 +107,7 @@ function addInventory() {
             {
                 name: "numberToBeAdded",
                 type: "input",
-                message: "How many would you like to add?",
+                message: "What is the new amount?",
                 validate: function (value) {
                     if (isNaN(value) === false) {
                         return true;
@@ -117,8 +117,8 @@ function addInventory() {
             }
         ])
         .then(function (answer) {
-            var query = "UPDATE stock_quantity FROM products SET stock_quantity = ? WHERE ?;"
-            connection.query(query, [stock_quantity + answer.numberToBeAdded, id = answer.productIDinput], function (err, res) {
+            var query = "UPDATE products SET stock_quantity = ? WHERE id = ?;"
+            connection.query(query, [ answer.numberToBeAdded, answer.productIDinput], function (err, res) {
                 console.log(
                     "You added " + answer.numberToBeAdded +
                     " products."
